@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="846.0" style="-fx-font-size: 40px; -fx-text-alignment: center;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="160.0" layoutY="64.0" prefHeight="519.0" prefWidth="502.0" style="-fx-border-color: brown; -fx-border-width: 5px;">
+         <top>
+            <TextArea prefHeight="64.0" prefWidth="502.0" style="-fx-font-size: 40px; -fx-font-alignment: center; -fx-font-weight: bold; -fx-text-fill: brown;" text="Pensée du jour" BorderPane.alignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </TextArea>
+         </top>
+         <center>
+            <TextArea id="listePensees" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: green; -fx-border-width: 2px;" BorderPane.alignment="CENTER" />
+         </center>
+         <bottom>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="516.0" text="Trouver une inspiration" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

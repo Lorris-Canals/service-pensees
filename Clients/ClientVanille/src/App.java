@@ -16,12 +16,16 @@ public class App {
 		
 		for(Iterator<Pensee> visiteur = listePensees.iterator(); visiteur.hasNext(); )
 		{
-			Pensee pensee = visiteur.next();		
+			Pensee pensee = visiteur.next();
 			Journal.ecrire(5, pensee.getMessage() + "(" + pensee.getAuteur() + ")");
 		}
 
 		Pensee pensee = new Pensee("Rossetti","Ce qui est plus triste qu une oeuvre inachevee, c est une oeuvre jamais commencee.");
 		penseeDAO.ajouterPensee(pensee);
+		
+		VueInspirationVisuelle.launch(VueInspirationVisuelle.class, args);
+		
+		
 
 	}
 	

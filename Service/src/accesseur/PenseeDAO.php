@@ -10,6 +10,25 @@
 			$requeteListerPensees->execute();
 			return $requeteListerPensees->fetchAll(PDO::FETCH_OBJ);
 		}
+
+		function trouverPensee($numero)
+		{			
+			$SQL_TROUVER_PENSEES = "SELECT * FROM pensee where idPensee =". $numero;
+			global $basededonnees;
+			$requeteTrouverPensee = $basededonnees->prepare($SQL_TROUVER_PENSEES);
+			$requeteTrouverPensee->execute();
+			return $requeteTrouverPensee->fetch(PDO::FETCH_OBJ);
+		}
+
+		function getNombrePensees()
+		{
+			$SQL_NOMBRE_PENSEES = "SELECT count(*) nbr FROM pensee";
+			global $basededonnees;
+			$requeteNombrePensee = $basededonnees->prepare($SQL_NOMBRE_PENSEES);
+			$requeteNombrePensee->execute();
+			return $requeteNombrePensee->fetch(PDO::FETCH_OBJ);
+
+		}
 		
 		function ajouterPensee($pensee)
 		{

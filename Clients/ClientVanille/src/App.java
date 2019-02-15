@@ -3,6 +3,7 @@ import java.util.List;
 import accesseur.PenseeDAO;
 import modele.Pensee;
 import outils.Journal;
+import vue.VueInspirationVisuelle;
 
 public class App {
 

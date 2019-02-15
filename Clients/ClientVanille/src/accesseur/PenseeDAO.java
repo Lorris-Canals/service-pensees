@@ -82,6 +82,30 @@ public class PenseeDAO implements PenseeURL{
 		decodeur.decoderReponseAction(xml);
 
 	}
+	
+	public List<Pensee> trouverPensee()
+	{
+		JournalDesactivable.ecrire("trouverPensee()");			
+		String xml = null;		
+		
+		try {
+			URL urlTrouverPensee = new URL(URL_TROUVER_PENSEE);
+			String derniereBalise = "</pensee>";
+			InputStream flux = urlTrouverPensee.openConnection().getInputStream();
+			Scanner lecteur = new Scanner(flux);
+			lecteur.useDelimiter(derniereBalise); 
+			xml = lecteur.next() + derniereBalise;
+			lecteur.close();
+			Journal.ecrire(2, "xml : " + xml);			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(null == xml) return null;
+		
+		return decodeur.decoderListe(xml);
+	}
 }
 
 /*

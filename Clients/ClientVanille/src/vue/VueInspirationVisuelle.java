@@ -1,9 +1,9 @@
+package vue;
 import java.util.Iterator;
 import java.util.List;
 
+import action.ControleurInspirationVisuelle;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,15 +29,16 @@ public class VueInspirationVisuelle extends Application {
 	public void start(Stage stade) throws Exception {
 		Parent racine = FXMLLoader.load(getClass().getResource("inspiration-visuelle.fxml"));
 		//Pane racine = new StackPane();
-		scene = new Scene(racine, 800, 600);
-		stade.setScene(scene);
+		this.scene = new Scene(racine, 800, 600);
+		stade.setScene(this.scene);
 		stade.show();
 		ControleurInspirationVisuelle.getInstance().initialiser();
 	}	
 	
 	public void afficherListePensees(List<Pensee> listePensees) {
 		System.out.println("afficherListePensees()");
-		TextArea champsMessage = (TextArea) scene.lookup("#listePensees");
+		TextArea champsMessage = (TextArea) this.scene.lookup("#listePensees");
+		champsMessage.setText("");// On reinitialise le champ de message
 		
 		for(Iterator<Pensee> visiteur = listePensees.iterator(); visiteur.hasNext();) {
 			Pensee pensee = visiteur.next();

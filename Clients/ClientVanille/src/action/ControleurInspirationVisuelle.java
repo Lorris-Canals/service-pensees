@@ -1,17 +1,16 @@
-import java.net.URL;
+package action;
+
+import javafx.fxml.FXML;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import accesseur.PenseeDAO;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import modele.Pensee;
 import outils.Journal;
+import vue.VueInspirationVisuelle;
 
-public class ControleurInspirationVisuelle implements Initializable{
+public class ControleurInspirationVisuelle{
 	
 	protected PenseeDAO penseeDAO = new PenseeDAO();
 	
@@ -32,19 +31,14 @@ public class ControleurInspirationVisuelle implements Initializable{
 
 	@FXML protected void trouverInspiration(ActionEvent evenement) {
     	
-    	System.out.println("trouverInspiration( )");
+    	System.out.println("trouverInspiration()");
+    	VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.trouverPensee());
 
 
     }
 	
 	public void initialiser() {
 		VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.listerPensees());
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.listerPensees());
-		
 	}
 	
 }

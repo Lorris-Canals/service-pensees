@@ -16,5 +16,6 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 	<auteur><?=($trouverPensee->auteur)?></auteur>
 	<message><?=($trouverPensee->message)?></message>
 	<annee><?=$trouverPensee->annee?></annee>
+	<source><?=$trouverPensee->source?></source>
 	<id><?=$trouverPensee->idPensee?></id>
 </pensee>

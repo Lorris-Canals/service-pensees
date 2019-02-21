@@ -1,4 +1,4 @@
-import accesseur.PenseeDAO;
+import cache.accesseur.PenseeDAO;
 import modele.Pensee;
 import outils.Journal;
 import vue.VueInspirationVisuelle;
@@ -13,7 +13,7 @@ public class App {
 		//Journal.activer();
 		Journal.activerNiveau(0);
 		
-		VueInspirationVisuelle.launch(VueInspirationVisuelle.class, args);
+		//VueInspirationVisuelle.launch(VueInspirationVisuelle.class, args);
 		
 		cachePenseeDAO.enregistrerPensee(new Pensee("coucou","coucou"));
 

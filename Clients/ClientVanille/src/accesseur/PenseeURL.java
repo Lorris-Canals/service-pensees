@@ -1,7 +1,7 @@
 package accesseur;
 
 public interface PenseeURL {
-	public static final String DSN = "jdbc:sqlite:C:/sqlite/bases/cache.inspiration.db";
-	public static final String SQL_ENREGISTRER_PENSEE = "insert into pensee(auteur, message) values(?,?)";
-	public static final String SQL_LISTER_PENSEES = "SELECT * FROM pensee";
+	public static final String URL_AJOUTER_PENSEE = "http://localhost/inspiration/src/pensee/ajouter/";
+	public static final String URL_LISTE_PENSEES = "http://localhost/inspiration/src/pensee/liste/";
+	public static final String URL_ALEATOIRE_PENSEE = "http://localhost/inspiration/src/pensee/aleatoire/";
 }

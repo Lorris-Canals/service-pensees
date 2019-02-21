@@ -7,13 +7,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import modele.DecodeurPenseesXML;
@@ -27,49 +20,92 @@ public class PenseeDAO implements PenseeURL{
 	
 	public List<Pensee> listerPensees()
 	{
-		List<Pensee> listePensees = new ArrayList<Pensee>();
 		JournalDesactivable.ecrire("listerPensees()");			
-		Connection basededonnees = null;
-		ResultSet curseurListePensees;
-		try {
-			basededonnees = DriverManager.getConnection(DSN);
-			Statement requeteListePensees  = basededonnees.createStatement();
-			curseurListePensees = requeteListePensees.executeQuery(SQL_LISTER_PENSEES);
-			if(curseurListePensees==null) return listePensees; //null
-			curseurListePensees.next();
+		String xml = null;		
 		
-			while(curseurListePensees.next())
-			{
-				String auteur = curseurListePensees.getString("auteur");
-				String message = curseurListePensees.getString("message");
-				System.out.println(auteur+"-"+message);
-				listePensees.add(new Pensee(auteur,message));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return listePensees;
-	}
-	
-	public void enregistrerPensee(Pensee pensee)
-	{
-		JournalDesactivable.ecrire("enregistrerPensee()");			
-		Connection basededonnees = null;
-
 		try {
-			basededonnees = DriverManager.getConnection(DSN);
-			PreparedStatement requeteEnregistrerPensee = basededonnees.prepareStatement(SQL_ENREGISTRER_PENSEE);
+			URL urlListePensees = new URL(URL_LISTE_PENSEES);
+			String derniereBalise = "</pensees>";
+			InputStream flux = urlListePensees.openConnection().getInputStream();
+			Scanner lecteur = new Scanner(flux);
+			lecteur.useDelimiter(derniereBalise); 
+			xml = lecteur.next() + derniereBalise;
+			lecteur.close();
+			Journal.ecrire(2, "xml : " + xml);			
 			
-			requeteEnregistrerPensee.setString(1, pensee.getAuteur());
-			requeteEnregistrerPensee.setString(2, pensee.getMessage());
-			
-			requeteEnregistrerPensee.execute();
-		} catch (SQLException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		if(null == xml) return null;
+		
+		return decodeur.decoderListe(xml);
+	}
+	
+	public void ajouterPensee(Pensee pensee)
+	{
+		Journal.ecrire(1, "ajouterPensee()");			
+		String xml = "";
+		try {
+						
+			URL urlAjouterPensee = new URL(URL_AJOUTER_PENSEE);
+			HttpURLConnection connection = (HttpURLConnection) urlAjouterPensee.openConnection();
+			connection.setDoOutput(true);
+			connection.setRequestMethod("POST");
+			//connection.setRequestProperty("User-Agent", "Java client");
+	        //connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			
+			OutputStream fluxEcriture = connection.getOutputStream();
+			OutputStreamWriter envoyeur = new OutputStreamWriter(fluxEcriture);
+			
+			envoyeur.write("auteur="+pensee.getAuteur()+"&message="+pensee.getMessage()+"&annee=" + pensee.getAnnee());
+			envoyeur.close();
+			
+			int codeReponse = connection.getResponseCode();
+			Journal.ecrire(2, "Code de réponse " + codeReponse);
+			
+			InputStream fluxLecture = connection.getInputStream();
+			Scanner lecteur = new Scanner(fluxLecture);
+			
+			String derniereBalise = "</action>";
+			lecteur.useDelimiter(derniereBalise);
+			xml = lecteur.next() + derniereBalise;
+			lecteur.close();
+			connection.disconnect();
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+		
+		decodeur.decoderReponseAction(xml);
 
 	}
 	
+	public List<Pensee> aleatoirePensee()
+	{
+		JournalDesactivable.ecrire("aleatoirePensee()");			
+		String xml = null;		
+		
+		try {
+			URL urlTrouverPensee = new URL(URL_ALEATOIRE_PENSEE);
+			String derniereBalise = "</pensee>";
+			InputStream flux = urlTrouverPensee.openConnection().getInputStream();
+			Scanner lecteur = new Scanner(flux);
+			lecteur.useDelimiter(derniereBalise); 
+			xml = lecteur.next() + derniereBalise;
+			lecteur.close();
+			Journal.ecrire(2, "xml : " + xml);			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(null == xml) return null;
+		
+		return decodeur.decoderListe(xml);
+	}
 }
 
 /*

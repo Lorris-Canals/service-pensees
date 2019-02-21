@@ -32,7 +32,7 @@ public class ControleurInspirationVisuelle{
 	@FXML protected void aleatoireInspiration(ActionEvent evenement) {
     	
     	System.out.println("aleatoireInspiration()");
-    	//VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.aleatoirePensee());
+    	VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.aleatoirePensee());
 
 
     }

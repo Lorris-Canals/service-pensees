@@ -46,6 +46,14 @@ public class VueInspirationVisuelle extends Application {
 			champsMessage.setText(champsMessage.getText() + "\n" + touteLaPensee);
 			Journal.ecrire(5, touteLaPensee);
 		}
+		
+	
+		
+	}
+	
+	public void afficherPensee(Pensee pensee) {
+		
+		
 	}
 	
 	

@@ -28,7 +28,7 @@ public class PenseeDAO implements PenseeURL{
 	public List<Pensee> listerPensees()
 	{
 		List<Pensee> listePensees = new ArrayList<Pensee>();
-		JournalDesactivable.ecrire("listerPensees()");			
+		JournalDesactivable.ecrire("cache.listerPensees()");			
 		Connection basededonnees = null;
 		ResultSet curseurListePensees;
 		try {
@@ -42,8 +42,9 @@ public class PenseeDAO implements PenseeURL{
 			{
 				String auteur = curseurListePensees.getString("auteur");
 				String message = curseurListePensees.getString("message");
-				System.out.println(auteur+"-"+message);
-				listePensees.add(new Pensee(auteur,message));
+				String source = curseurListePensees.getString("source");
+				System.out.println(auteur+"-"+message+"("+source+")");
+				listePensees.add(new Pensee(auteur,message,source));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -53,7 +54,7 @@ public class PenseeDAO implements PenseeURL{
 	
 	public void enregistrerPensee(Pensee pensee)
 	{
-		JournalDesactivable.ecrire("enregistrerPensee()");			
+		JournalDesactivable.ecrire("cache.enregistrerPensee()");			
 		Connection basededonnees = null;
 
 		try {
@@ -62,6 +63,7 @@ public class PenseeDAO implements PenseeURL{
 			
 			requeteEnregistrerPensee.setString(1, pensee.getAuteur());
 			requeteEnregistrerPensee.setString(2, pensee.getMessage());
+			requeteEnregistrerPensee.setString(3, pensee.getSource());
 			
 			requeteEnregistrerPensee.execute();
 		} catch (SQLException e) {

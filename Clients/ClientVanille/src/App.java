@@ -15,7 +15,7 @@ public class App {
 		
 		//VueInspirationVisuelle.launch(VueInspirationVisuelle.class, args);
 		
-		cachePenseeDAO.enregistrerPensee(new Pensee("coucou","coucou"));
+		cachePenseeDAO.enregistrerPensee(new Pensee("coucou","coucou","La Fontaine"));
 
 	}
 	

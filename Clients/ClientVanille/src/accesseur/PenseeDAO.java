@@ -51,14 +51,18 @@ public class PenseeDAO implements PenseeURL{
 		return listePensees;
 	}
 	
-	public void enregitrerPensee(Pensee pensee)
+	public void enregistrerPensee(Pensee pensee)
 	{
-		JournalDesactivable.ecrire("enregitrerPensee()");			
+		JournalDesactivable.ecrire("enregistrerPensee()");			
 		Connection basededonnees = null;
 
 		try {
 			basededonnees = DriverManager.getConnection(DSN);
 			PreparedStatement requeteEnregistrerPensee = basededonnees.prepareStatement(SQL_ENREGISTRER_PENSEE);
+			
+			requeteEnregistrerPensee.setString(1, pensee.getAuteur());
+			requeteEnregistrerPensee.setString(2, pensee.getMessage());
+			
 			requeteEnregistrerPensee.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

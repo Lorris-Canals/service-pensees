@@ -29,10 +29,10 @@ public class ControleurInspirationVisuelle{
 	protected static ControleurInspirationVisuelle instance = null;
 	public static ControleurInspirationVisuelle getInstance() {return ControleurInspirationVisuelle.instance;}
 
-	@FXML protected void trouverInspiration(ActionEvent evenement) {
+	@FXML protected void aleatoireInspiration(ActionEvent evenement) {
     	
-    	System.out.println("trouverInspiration()");
-    	VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.trouverPensee());
+    	System.out.println("aleatoireInspiration()");
+    	VueInspirationVisuelle.getInstance().afficherListePensees(penseeDAO.aleatoirePensee());
 
 
     }

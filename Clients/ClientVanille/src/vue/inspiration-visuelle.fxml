@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="846.0" style="-fx-font-size: 40px; -fx-text-alignment: center;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="846.0" style="-fx-font-size: 40px; -fx-text-alignment: center;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="action.ControleurInspirationVisuelle">
    <children>
       <BorderPane layoutX="160.0" layoutY="64.0" prefHeight="519.0" prefWidth="502.0" style="-fx-border-color: brown; -fx-border-width: 5px;">
          <top>
@@ -20,7 +21,7 @@
             <TextArea id="listePensees" prefHeight="80.0" prefWidth="200.0" style="-fx-border-color: green; -fx-border-width: 2px;" BorderPane.alignment="CENTER" />
          </center>
          <bottom>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="516.0" text="Trouver une inspiration" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#aleatoireInspiration" prefHeight="31.0" prefWidth="516.0" text="Trouver une inspiration" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>

@@ -83,13 +83,13 @@ public class PenseeDAO implements PenseeURL{
 
 	}
 	
-	public List<Pensee> trouverPensee()
+	public List<Pensee> aleatoirePensee()
 	{
-		JournalDesactivable.ecrire("trouverPensee()");			
+		JournalDesactivable.ecrire("aleatoirePensee()");			
 		String xml = null;		
 		
 		try {
-			URL urlTrouverPensee = new URL(URL_TROUVER_PENSEE);
+			URL urlTrouverPensee = new URL(URL_ALEATOIRE_PENSEE);
 			String derniereBalise = "</pensee>";
 			InputStream flux = urlTrouverPensee.openConnection().getInputStream();
 			Scanner lecteur = new Scanner(flux);
